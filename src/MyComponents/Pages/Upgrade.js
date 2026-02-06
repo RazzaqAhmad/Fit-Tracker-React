@@ -12,7 +12,7 @@ const Upgrade = () => {
     },
     {
       name: "Pro",
-      price: "$9.99",
+      price: "$6.00",
       period: "/year",
       features: ["Everything in Free", "Unlimited History Tracking", "Advanced Wellness Analytics", "Personalized Meal Plans", "No Advertisements"],
       buttonText: "Upgrade to Pro",
@@ -22,7 +22,7 @@ const Upgrade = () => {
 
   const handleUpgrade = () => {
   // Replace this with your actual Stripe Payment Link
-  window.location.href = "https://buy.stripe.com/your_unique_link_here";
+  window.location.href = "https://buy.stripe.com/test_bJe28q5PRa89dNwaNu3F600";
 };
 
   return (
