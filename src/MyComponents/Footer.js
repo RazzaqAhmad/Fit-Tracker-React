@@ -5,53 +5,48 @@ function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-dark text-light pt-5 pb-3 mt-auto border-top border-white border-opacity-10">
+    /* Reduced pt-5 to pt-4 on desktop and pt-3 on mobile. 
+       Added extra bottom padding to clear the mobile nav bar. */
+    <footer className="bg-dark text-light pt-3 pt-md-4 pb-5 pb-md-3 mt-auto border-top border-white border-opacity-10">
       <div className="container">
-        <div className="row gy-4">
+        <div className="row gy-3"> {/* Smaller vertical gap for mobile */}
+          
+          {/* Logo and Tagline - Scaled down for mobile */}
           <div className="col-md-4 text-center text-md-start">
-            <h5 className="fw-bold text-info mb-3">
+            <h6 className="fw-bold text-info mb-2">
               Fit<span className="text-white">Track</span>
-            </h5>
-            <p className="small text-secondary" style={{ lineHeight: '1.6' }}>
-              Empowering your health journey with precision tracking and 
-              personalized wellness insights. Stay fit, stay informed.
+            </h6>
+            <p className="small text-secondary mb-0 d-md-block d-none" style={{ fontSize: '0.75rem' }}>
+              Empowering your health journey with precision tracking.
             </p>
           </div>
 
+          {/* Social Icons - Compact row */}
           <div className="col-md-4 text-center">
-            <h6 className="fw-bold mb-3 text-uppercase small ls-wide text-white-50">Health Tools</h6>
-            <ul className="list-unstyled small text-secondary">
-              <li className="mb-2"><Link to="/" className="text-decoration-none text-secondary">BMI Calculator</Link></li>
-              <li className="mb-2"><Link to="/calories" className="text-decoration-none text-secondary">Calorie Tracker</Link></li>
-              <li className="mb-2"><Link to="/history" className="text-decoration-none text-secondary">Progress History</Link></li>
-            </ul>
+            <div className="d-flex justify-content-center gap-3">
+              <a href="#!" className="text-secondary fs-6"><i className="bi bi-facebook"></i></a>
+              <a href="#!" className="text-secondary fs-6"><i className="bi bi-instagram"></i></a>
+              <a href="#!" className="text-secondary fs-6"><i className="bi bi-twitter-x"></i></a>
+              <a href="mailto:support@fittrack.com" className="text-secondary fs-6"><i className="bi bi-envelope-fill"></i></a>
+            </div>
           </div>
 
-          <div className="col-md-4 text-center text-md-end">
-            <h6 className="fw-bold mb-3 text-uppercase small ls-wide text-white-50">Connect With Us</h6>
-            <div className="d-flex justify-content-center justify-content-md-end gap-3 mb-3">
-              <a href="#!" className="text-secondary fs-5 hover-info transition-all"><i className="bi bi-facebook"></i></a>
-              <a href="#!" className="text-secondary fs-5 hover-info transition-all"><i className="bi bi-instagram"></i></a>
-              <a href="#!" className="text-secondary fs-5 hover-info transition-all"><i className="bi bi-twitter-x"></i></a>
-              <a href="mailto:support@fittrack.com" className="text-secondary fs-5 hover-info transition-all"><i className="bi bi-envelope-fill"></i></a>
+          {/* Legal Links - Combined into one line for mobile */}
+          <div className="col-md-4 text-center text-md-end mt-2 mt-md-0">
+            <div style={{ fontSize: '0.7rem' }}>
+              <Link to="/privacy" className="text-secondary text-decoration-none me-2">Privacy</Link>
+              <span className="text-secondary opacity-25">|</span>
+              <Link to="/privacy" className="text-secondary text-decoration-none ms-2">Terms</Link>
             </div>
           </div>
         </div>
 
-        <hr className="my-4 border-secondary opacity-25" />
+        {/* Removed <hr /> as it creates too much white space on small screens */}
 
-        <div className="row align-items-center">
-          <div className="col-md-6 text-center text-md-start">
-            <p className="small text-secondary mb-0">
-              &copy; {currentYear} FitTrack Wellness. Built for better health.
-            </p>
-          </div>
-          <div className="col-md-6 text-center text-md-end">
-            <div className="small">
-              <Link to="/privacy" className="text-secondary me-3 text-decoration-none hover-white">Privacy Policy</Link>
-              <Link to="/privacy" className="text-secondary text-decoration-none hover-white">Terms of Service</Link>
-            </div>
-          </div>
+        <div className="text-center mt-3">
+          <p className="text-secondary mb-0" style={{ fontSize: '0.65rem', opacity: 0.6 }}>
+            &copy; {currentYear} FitTrack Wellness.
+          </p>
         </div>
       </div>
     </footer>
