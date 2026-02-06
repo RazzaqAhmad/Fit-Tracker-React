@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 
 export default function Home() {
-  // 1. Setup State for inputs and results
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
   const [bmi, setBmi] = useState(null);
   const [status, setStatus] = useState('--');
 
-  // 2. Calculation Logic
   const calculateBMI = () => {
     if (height && weight) {
       const heightInMeters = height / 100;
       const bmiValue = (weight / (heightInMeters * heightInMeters)).toFixed(1);
       setBmi(bmiValue);
       
-      // Determine Status
       if (bmiValue < 18.5) setStatus('Underweight');
       else if (bmiValue >= 18.5 && bmiValue <= 24.9) setStatus('Healthy');
       else if (bmiValue >= 25 && bmiValue <= 29.9) setStatus('Overweight');
@@ -22,7 +19,6 @@ export default function Home() {
     }
   };
 const saveCompleteHealthSnapshot = () => {
-  // Pull data from all "Middlemen"
   const savedGoals = JSON.parse(localStorage.getItem("fitnessGoals")) || { weight: "--", bmi: "--" };
   const savedCal = localStorage.getItem("temp_calories") || "--";
   const savedDiet = localStorage.getItem("temp_diet_plan") || "No diet selected";
@@ -31,11 +27,11 @@ const saveCompleteHealthSnapshot = () => {
   const newEntry = {
     id: Date.now(),
     date: new Date().toLocaleString(),
-    bmi: bmi,                // Current BMI from Home state
-    category: status,         // Current status from Home state
-    calories: savedCal,       // From Calories page
-    diet: savedDiet,          // From Diet page
-    exercise: savedEx,        // From Exercise page
+    bmi: bmi,               
+    category: status,         
+    calories: savedCal,     
+    diet: savedDiet,          
+    exercise: savedEx,        
     targetWeight: savedGoals.weight
   };
 
@@ -46,7 +42,6 @@ const saveCompleteHealthSnapshot = () => {
   return (
     <div className="container mt-4">
       <div className="row">
-        {/* Left Side: Instructions */}
         <div className="col-md-6">
           <h2>Home Page</h2>
           <p>Welcome to the BMI Calculator application!</p>
@@ -60,7 +55,6 @@ const saveCompleteHealthSnapshot = () => {
           </div>
         </div>
 
-        {/* Right Side: Calculator Card */}
         <div className="col-md-6">
           <div className="card shadow p-4 border-success">
             <h1 className="text-center mb-4">BMI Calculator</h1>
@@ -97,7 +91,6 @@ const saveCompleteHealthSnapshot = () => {
               <p className="fw-bold">{status}</p>
             </div>
 
-            {/* Recommendations Section */}
             <div className="alert alert-info">
               <strong>Diet Tip:</strong> {status === 'Healthy' ? 'Maintain your current diet.' : 'Consult a nutritionist.'}
             </div>

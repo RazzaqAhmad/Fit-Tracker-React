@@ -30,7 +30,6 @@ function Footer() {
           <div className="col-md-4 text-center text-md-end">
             <h6 className="fw-bold mb-3 text-uppercase small ls-wide text-white-50">Connect With Us</h6>
             <div className="d-flex justify-content-center justify-content-md-end gap-3 mb-3">
-              {/* Added 'rel="noreferrer"' and replaced '#' with '#!' to fix warnings */}
               <a href="#!" className="text-secondary fs-5 hover-info transition-all"><i className="bi bi-facebook"></i></a>
               <a href="#!" className="text-secondary fs-5 hover-info transition-all"><i className="bi bi-instagram"></i></a>
               <a href="#!" className="text-secondary fs-5 hover-info transition-all"><i className="bi bi-twitter-x"></i></a>
@@ -50,7 +49,6 @@ function Footer() {
           <div className="col-md-6 text-center text-md-end">
             <div className="small">
               <Link to="/privacy" className="text-secondary me-3 text-decoration-none hover-white">Privacy Policy</Link>
-              {/* Pointing to /privacy for now until you create Terms */}
               <Link to="/privacy" className="text-secondary text-decoration-none hover-white">Terms of Service</Link>
             </div>
           </div>

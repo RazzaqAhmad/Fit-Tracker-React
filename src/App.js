@@ -11,33 +11,18 @@ import History from './MyComponents/Pages/History';
 import PrivacyPolicy from './MyComponents/PrivacyPolicy';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 function App() {
   return (
     <Router>
-      {/* Header usually stays at the top for both mobile/desktop or hidden on mobile */}
-      <Header />
+      <div className="fixed-header px-3">
+        <Header />
+      </div>
 
-      {/* Change: Use d-flex instead of 'row' to handle the Sidebar better.
-          flex-column for mobile (stacking) and flex-md-row for desktop (side-by-side).
-      */}
       <div className="d-flex flex-column flex-md-row min-vh-100">
-        
-        {/* Our Responsive Navbar (Sidebar on Desktop, Bottom Bar on Mobile) */}
         <Navbar />
 
-        {/* Main Content Area 
-            Added 'flex-grow-1' to take remaining space.
-            Added padding-bottom on mobile to prevent the Bottom Nav from covering content.
-        */}
-        <div className="flex-grow-1 d-flex flex-column" 
-             style={{ 
-               overflowX: 'hidden', 
-               paddingBottom: '70px', // Space for Bottom Nav on Mobile
-               paddingBottomMd: '0px'  // Reset for Desktop
-             }}>
-          
-          <main className="container-fluid py-3 flex-grow-1">
+        <div className="flex-grow-1 main-content-area">
+          <main className="container py-4">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/diet" element={<Diet />} />
@@ -48,11 +33,8 @@ function App() {
               <Route path="/privacy" element={<PrivacyPolicy />} />
             </Routes>
           </main>
-
-          {/* Footer sits at the bottom of the content area */}
           <Footer />
         </div>
-
       </div>
     </Router>
   );

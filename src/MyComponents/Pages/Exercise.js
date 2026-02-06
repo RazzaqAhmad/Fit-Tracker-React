@@ -26,7 +26,6 @@ export default function Exercise() {
     ]
   };
 
-  // Load selection if user returns to page
   useEffect(() => {
     const savedTempEx = localStorage.getItem("temp_exercise_category");
     if (savedTempEx) {
@@ -34,16 +33,13 @@ export default function Exercise() {
     }
   }, []);
 
-  // Handle Change and Save to LocalStorage
   const handleCategoryChange = (e) => {
     const selectedValue = e.target.value;
     setCategory(selectedValue);
 
     if (selectedValue) {
-      // 1. Save the Category Name
       localStorage.setItem("temp_exercise_category", selectedValue);
       
-      // 2. Save the ENTIRE EXERCISE LIST as a string for History
       const fullExerciseString = exercises[selectedValue].join(" | ");
       localStorage.setItem("temp_exercise_plan", fullExerciseString);
     } else {
@@ -60,7 +56,6 @@ export default function Exercise() {
         </h2>
         <p className="text-muted">Personalized workout routines based on your BMI category.</p>
 
-        {/* Category Selection */}
         <div className="mb-4">
           <label className="form-label fw-bold">Select Your Category:</label>
           <select 
@@ -76,7 +71,6 @@ export default function Exercise() {
           </select>
         </div>
 
-        {/* Exercise List Display */}
         <div className="mt-2">
           {category ? (
             <div className="p-3 rounded bg-info bg-opacity-10 border border-info">

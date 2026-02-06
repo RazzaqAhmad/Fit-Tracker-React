@@ -1,90 +1,113 @@
 /* --- Core Layout Fixes --- */
 .App {
   text-align: center;
-  font-family: 'Inter', sans-serif; /* Modern apps use clean sans-serif */
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden; 
 }
 
-/* Fix for the Main Content Area */
-.flex-grow-1 {
-  transition: padding 0.3s ease;
-  background-color: #f8fafc; /* Subtle light background for the dashboard */
+/* --- FIXED HEADER --- */
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background-color: #0f172a;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.fixed-header {
+  height: 70px; /* Adjusted from 80px for a cleaner look */
 }
 
-/* --- Mobile Responsiveness --- */
-@media (max-width: 767px) {
-  .flex-grow-1 {
-    padding-bottom: 90px !important; /* Extra room for the bottom nav */
-  }
-
-  /* Fix for your 400px button - it will break mobile screens otherwise */
-  #myButton {
-    width: 100% !important; 
-    max-width: 350px;
-  }
-
-  /* Make the horizontal scroll cards slightly smaller on mobile */
-  .myDiv {
-    width: 200px !important;
-  }
+.main-content-area {
+  margin-top: 70px; /* Must match the height above */
+}
+/* --- MAIN CONTENT AREA --- */
+.main-content-area {
+  margin-top: 70px;
+  background-color: #f8fafc;
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
 }
 
-/* Desktop Reset */
+/* --- DESKTOP ADJUSTMENTS --- */
 @media (min-width: 768px) {
-  .flex-grow-1 {
+  .fixed-header {
+    left: 280px; 
+    width: calc(100% - 280px);
+  }
+  
+  .main-content-area {
+    margin-left: 280px;
     padding-bottom: 0 !important;
   }
 }
 
-/* --- Component Styling --- */
+/* --- MOBILE ADJUSTMENTS --- */
+@media (max-width: 767px) {
+  .main-content-area {
+    margin-left: 0;
+    padding-bottom: 100px !important; /* Increased padding for bottom nav safety */
+  }
 
-/* The Green Action Button */
-#myButton {
-  width: 400px;
-  margin-top: 20px;
-  padding: 14px 24px;
-  font-size: 16px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #14ca2c 0%, #0f9b22 100%);
-  color: white;
-  border: none;
-  border-radius: 12px; /* Smoother corners */
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 12px rgba(20, 202, 44, 0.3);
+  #myButton {
+    width: 90% !important;
+    max-width: 350px;
+  }
 }
 
-#myButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(20, 202, 44, 0.4);
+/* --- NAVIGATION ACTIVE STATES (The Fix) --- */
+
+/* Sidebar (Desktop) */
+.nav-link.active-sidebar {
+  color: #ffffff !important;
+  background: linear-gradient(90deg, #198754, #20c997) !important;
+  opacity: 1 !important;
 }
 
-/* Horizontal Scroll for History/Cards */
-.rowDiv {
-  display: flex;
-  overflow-x: auto;
-  gap: 16px;
-  padding: 10px 5px 20px 5px;
-  scrollbar-width: none; /* Hide ugly scrollbars on Firefox */
-  -ms-overflow-style: none; /* Hide on IE */
+/* Bottom Nav (Mobile) */
+/* This targets the icon specifically when the parent has the active class */
+.active-bottom-item i {
+  color: #22c55e !important; /* Bright success green */
+  transform: scale(1.1); /* Slightly enlarge active icon */
+  transition: all 0.2s ease;
 }
 
-.rowDiv::-webkit-scrollbar {
-  display: none; /* Hide on Chrome/Safari */
+/* This targets the text label */
+.active-bottom-item span {
+  color: #22c55e !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
 }
 
+/* The highlighted pill background */
+.active-pill {
+  background-color: rgba(34, 197, 94, 0.15) !important;
+  border-radius: 20px;
+}
+
+/* Ensure inactive items are visible but secondary */
+.text-white-50 {
+  color: rgba(255, 255, 255, 0.5) !important;
+  opacity: 1; /* Reset opacity if Bootstrap is hiding it */
+}
+
+/* --- REST OF STYLING --- */
 .myDiv {
   flex: 0 0 auto;
   width: 260px;
   padding: 20px;
   border-radius: 16px;
-  color: white;
   background: #ffffff;
   color: #1e293b;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0,0,0,0.05);
+  text-align: left;
 }
-
-/* Sidebar/Nav Hover Effects */
-.nav-links a {
-  transition: color 0.3s ease;
+.text-success {
+  color: #2ecc71 !important; /* A much brighter, neon-style green */
 }
