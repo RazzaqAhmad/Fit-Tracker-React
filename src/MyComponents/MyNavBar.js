@@ -1,98 +1,121 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-
   const isActive = (path) => location.pathname === path;
 
   const menuItems = [
     { path: "/", icon: "bi-house", label: "Home" },
-    { path: "/diet", icon: "bi-apple", label: "Diet Plan" },
+    { path: "/diet", icon: "bi-apple", label: "Diet" },
     { path: "/calories", icon: "bi-fire", label: "Calories" },
     { path: "/exercise", icon: "bi-activity", label: "Workout" },
-    { path: "/goals", icon: "bi-trophy", label: "My Goals" },
     { path: "/history", icon: "bi-clock-history", label: "History" },
   ];
 
   return (
-    <div 
-      className="col-auto col-md-3 shadow-lg d-flex flex-column" 
-      style={{ 
-        background: "#0f172a", 
-        borderRight: "1px solid rgba(255,255,255,0.1)",
-        /* FIX: Lock height to viewport and fix position */
-        height: "100vh", 
-        position: "sticky",
-        top: 0,
-        left: 0,
-        overflowY: "auto", // Allows the sidebar itself to scroll if you add too many menu items
-        zIndex: 1050
-      }}
-    >
-      <div className="p-4 flex-grow-1">
-        {/* Brand Section */}
-        <div className="d-flex align-items-center mb-5 mt-2 px-2">
-          <div className="bg-success rounded-3 d-flex align-items-center justify-content-center shadow" 
-               style={{ minWidth: "40px", height: "40px" }}>
-            <i className="bi bi-heart-pulse-fill text-white fs-5"></i>
+    <>
+      {/* --- MOBILE TOP HEADER (New!) --- */}
+      <div className="d-md-none sticky-top w-100 px-3 py-2 d-flex align-items-center justify-content-between shadow-sm" 
+           style={{ background: "#0f172a", borderBottom: "1px solid rgba(255,255,255,0.1)", zIndex: 1060 }}>
+        <div className="d-flex align-items-center">
+          <div className="bg-success rounded-2 p-1 me-2">
+            <i className="bi bi-heart-pulse-fill text-white fs-6"></i>
           </div>
-          <span className="ms-3 fs-5 fw-bold text-white d-none d-sm-inline" style={{ letterSpacing: "1px" }}>
-            FIT<span className="text-success text-opacity-75">TRACK</span>
-          </span>
+          <span className="fw-bold text-white small mb-0">FITTRACK</span>
         </div>
-        
-        <ul className="nav nav-pills flex-column gap-2">
-          {menuItems.map((item, index) => {
-            const active = isActive(item.path);
-            const isHovered = hoveredIndex === index;
+        <div className="rounded-circle bg-white bg-opacity-10 p-1">
+          <i className="bi bi-person-circle text-success fs-5"></i>
+        </div>
+      </div>
 
-            return (
-              <li className="nav-item" key={item.path} 
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}>
+      {/* --- DESKTOP SIDEBAR --- */}
+      <div 
+        className="d-none d-md-flex flex-column vh-100 shadow-lg" 
+        style={{ 
+          minWidth: "260px",
+          maxWidth: "260px",
+          background: "#0f172a", 
+          borderRight: "1px solid rgba(255,255,255,0.1)",
+          position: "sticky",
+          top: 0,
+          zIndex: 1050
+        }}
+      >
+        <div className="p-4 flex-grow-1">
+          <div className="d-flex align-items-center mb-5 mt-2">
+            <div className="bg-success rounded-3 p-2 shadow-sm">
+              <i className="bi bi-heart-pulse-fill text-white fs-4"></i>
+            </div>
+            <span className="ms-3 fs-4 fw-bold text-white">
+              FIT<span className="text-success">TRACK</span>
+            </span>
+          </div>
+          
+          <ul className="nav nav-pills flex-column gap-2">
+            {menuItems.map((item) => (
+              <li key={item.path}>
                 <Link 
                   to={item.path}
-                  className={`nav-link border-0 d-flex align-items-center py-3 px-3 rounded-3 shadow-none ${active ? 'text-white' : 'text-white-50'}`}
+                  className={`nav-link border-0 d-flex align-items-center py-3 px-3 rounded-3 transition-all ${
+                    isActive(item.path) ? 'text-white shadow' : 'text-white-50'
+                  }`}
                   style={{ 
-                    transition: "all 0.3s ease",
-                    background: active 
-                      ? "linear-gradient(90deg, #198754, #20c997)" 
-                      : isHovered ? "rgba(255,255,255,0.05)" : "transparent",
-                    transform: isHovered && !active ? "translateX(8px)" : "none",
+                    background: isActive(item.path) ? "linear-gradient(90deg, #198754, #20c997)" : "transparent",
                   }}
                 >
-                  <i className={`bi ${item.icon} fs-5`} style={{ color: active ? "white" : (isHovered ? "#20c997" : "inherit") }}></i>
-                  <span className="ms-3 d-none d-sm-inline fw-semibold small text-uppercase" style={{ letterSpacing: "0.5px" }}>
-                    {item.label}
-                  </span>
-                  
-                  {active && (
-                    <div className="ms-auto d-none d-md-block bg-white rounded-circle shadow-sm" 
-                         style={{ width: "6px", height: "6px" }}></div>
-                  )}
+                  <i className={`bi ${item.icon} fs-5 me-3`}></i>
+                  <span className="fw-semibold small text-uppercase">{item.label}</span>
                 </Link>
               </li>
-            );
-          })}
-        </ul>
-      </div>
+            ))}
+          </ul>
+        </div>
 
-      {/* Profile Section */}
-      <div className="mt-auto w-100 p-4 border-top border-white border-opacity-10 bg-dark bg-opacity-25">
-        <div className="d-flex align-items-center p-2 rounded-4">
-           <div className="rounded-circle bg-success bg-opacity-25 d-flex align-items-center justify-content-center border border-success border-opacity-25" 
-                style={{ minWidth: "40px", height: "40px" }}>
-              <i className="bi bi-person-circle text-success fs-5"></i>
-           </div>
-           <div className="overflow-hidden d-none d-sm-block ms-3">
-              <p className="small text-white mb-0 fw-bold">Guest User</p>
+        <div className="p-4 border-top border-white border-opacity-10 bg-black bg-opacity-20">
+          <div className="d-flex align-items-center p-2 rounded-3">
+            <i className="bi bi-person-circle text-success fs-3 me-3"></i>
+            <div className="overflow-hidden">
+              <p className="small text-white mb-0 fw-bold text-truncate">Active User</p>
               <p className="text-white-50 mb-0" style={{ fontSize: "0.65rem" }}>FREE ACCOUNT</p>
-           </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* --- MOBILE BOTTOM NAV (Glassmorphism Style) --- */}
+      <div 
+        className="d-md-none fixed-bottom shadow-lg"
+        style={{ 
+          background: "rgba(15, 23, 42, 0.95)", 
+          backdropFilter: "blur(10px)",
+          borderTop: "1px solid rgba(255,255,255,0.1)", 
+          zIndex: 2000,
+          paddingBottom: "env(safe-area-inset-bottom)" // Fixes iPhone notch overlap
+        }}
+      >
+        <div className="d-flex justify-content-around align-items-center py-1">
+          {menuItems.map((item) => (
+            <Link 
+              key={item.path} 
+              to={item.path} 
+              className="text-decoration-none d-flex flex-column align-items-center py-2 px-1"
+              style={{ width: "20%", transition: "0.2s" }}
+            >
+              <div className={`rounded-pill px-3 py-1 mb-1 transition-all ${isActive(item.path) ? 'bg-success bg-opacity-20' : ''}`}>
+                <i className={`bi ${item.icon} fs-5 ${isActive(item.path) ? 'text-success' : 'text-white-50'}`}></i>
+              </div>
+              <span 
+                className={`fw-bold ${isActive(item.path) ? 'text-success' : 'text-white-50'}`}
+                style={{ fontSize: "0.6rem", letterSpacing: "0.3px" }}
+              >
+                {item.label}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 

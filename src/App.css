@@ -1,112 +1,90 @@
+/* --- Core Layout Fixes --- */
 .App {
   text-align: center;
+  font-family: 'Inter', sans-serif; /* Modern apps use clean sans-serif */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Fix for the Main Content Area */
+.flex-grow-1 {
+  transition: padding 0.3s ease;
+  background-color: #f8fafc; /* Subtle light background for the dashboard */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* --- Mobile Responsiveness --- */
+@media (max-width: 767px) {
+  .flex-grow-1 {
+    padding-bottom: 90px !important; /* Extra room for the bottom nav */
+  }
+
+  /* Fix for your 400px button - it will break mobile screens otherwise */
+  #myButton {
+    width: 100% !important; 
+    max-width: 350px;
+  }
+
+  /* Make the horizontal scroll cards slightly smaller on mobile */
+  .myDiv {
+    width: 200px !important;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
+/* Desktop Reset */
+@media (min-width: 768px) {
+  .flex-grow-1 {
+    padding-bottom: 0 !important;
   }
 }
 
+/* --- Component Styling --- */
+
+/* The Green Action Button */
 #myButton {
   width: 400px;
   margin-top: 20px;
-  padding: 12px 24px;
+  padding: 14px 24px;
   font-size: 16px;
-  background-color: #14ca2c;
+  font-weight: 600;
+  background: linear-gradient(135deg, #14ca2c 0%, #0f9b22 100%);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 12px; /* Smoother corners */
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(20, 202, 44, 0.3);
 }
 
-.profile-wrapper {
-  padding: 20px;
-  background-color: #f8f8f8;
+#myButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(20, 202, 44, 0.4);
 }
 
+/* Horizontal Scroll for History/Cards */
 .rowDiv {
   display: flex;
   overflow-x: auto;
   gap: 16px;
-  padding-bottom: 10px;
-  scrollbar-width: thin;
+  padding: 10px 5px 20px 5px;
+  scrollbar-width: none; /* Hide ugly scrollbars on Firefox */
+  -ms-overflow-style: none; /* Hide on IE */
+}
+
+.rowDiv::-webkit-scrollbar {
+  display: none; /* Hide on Chrome/Safari */
 }
 
 .myDiv {
   flex: 0 0 auto;
-  width: 250px;
-  /* Smaller width */
-  min-width: 200px;
-  padding: 10px;
-  border-radius: 10px;
+  width: 260px;
+  padding: 20px;
+  border-radius: 16px;
   color: white;
-  font-weight: bold;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
-.car-img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-}.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-  background-color: #222;
-  color: white;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-  align-items: center;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
+/* Sidebar/Nav Hover Effects */
 .nav-links a {
-  color: white;
-  text-decoration: none;
-}
-
-.nav-links a:hover {
-  color: #00bcd4;
+  transition: color 0.3s ease;
 }
