@@ -9,6 +9,7 @@ import Exercise from './MyComponents/Pages/Exercise';
 import Goals from './MyComponents/Pages/Goals';
 import History from './MyComponents/Pages/History';
 import PrivacyPolicy from './MyComponents/PrivacyPolicy';
+import Upgrade from './MyComponents/Pages/Upgrade';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
@@ -31,6 +32,7 @@ function App() {
               <Route path="/goals" element={<Goals />} />
               <Route path="/history" element={<History />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/upgrade" element={<Upgrade />} />
             </Routes>
           </main>
           <Footer />

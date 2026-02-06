@@ -1,11 +1,32 @@
-/* --- Core Layout Fixes --- */
-.App {
-  text-align: center;
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden; 
+/* --- 1. CORE LAYOUT & SCROLL FIX --- */
+html, body {
+  background-color: #0f172a;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
-/* --- FIXED HEADER --- */
+.App {
+  font-family: 'Inter', sans-serif;
+  background-color: #0f172a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 2. MAIN CONTENT AREA (The Mobile Visibility Fix) --- */
+.main-content-area {
+  margin-top: 70px; /* Space for Fixed Header */
+  background-color: #0f172a;
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  color: #f8fafc;
+  overflow-y: auto; /* Essential for mobile scrolling */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* --- 3. FIXED HEADER --- */
 .fixed-header {
   position: fixed;
   top: 0;
@@ -18,96 +39,65 @@
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.fixed-header {
-  height: 70px; /* Adjusted from 80px for a cleaner look */
-}
 
-.main-content-area {
-  margin-top: 70px; /* Must match the height above */
-}
-/* --- MAIN CONTENT AREA --- */
-.main-content-area {
-  margin-top: 70px;
-  background-color: #f8fafc;
-  min-height: calc(100vh - 70px);
-  display: flex;
-  flex-direction: column;
-}
-
-/* --- DESKTOP ADJUSTMENTS --- */
+/* --- 4. DESKTOP ADJUSTMENTS (min-width: 768px) --- */
 @media (min-width: 768px) {
   .fixed-header {
-    left: 280px; 
+    left: 280px;
     width: calc(100% - 280px);
   }
   
   .main-content-area {
     margin-left: 280px;
-    padding-bottom: 0 !important;
+    padding: 30px;
   }
 }
 
-/* --- MOBILE ADJUSTMENTS --- */
+/* --- 5. MOBILE ADJUSTMENTS (max-width: 767px) --- */
 @media (max-width: 767px) {
   .main-content-area {
     margin-left: 0;
-    padding-bottom: 100px !important; /* Increased padding for bottom nav safety */
-  }
-
-  #myButton {
-    width: 90% !important;
-    max-width: 350px;
+    padding: 15px;
+    /* Extra padding at bottom so the "Stripe" text isn't hidden by Mobile Nav */
+    padding-bottom: 120px !important; 
   }
 }
 
-/* --- NAVIGATION ACTIVE STATES (The Fix) --- */
+/* --- 6. TEXT & UI COLORS (Ensuring visibility) --- */
+.text-success { color: #2ecc71 !important; }
+.text-white-50 { color: rgba(255, 255, 255, 0.5) !important; }
 
-/* Sidebar (Desktop) */
+/* Global Override: Fixes dark text issues in standard Bootstrap components */
+.text-dark, .text-body, .card-title, .card-text {
+  color: #f8fafc !important;
+}
+
+.text-secondary, .text-muted {
+  color: #94a3b8 !important;
+}
+
+/* --- 7. PRO PAGE SPECIFIC ANIMATIONS --- */
+.ring-active {
+  outline: 2px solid #2ecc71;
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(46, 204, 113, 0.2);
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3) !important;
+}
+
+/* --- 8. NAVIGATION STATES --- */
 .nav-link.active-sidebar {
   color: #ffffff !important;
   background: linear-gradient(90deg, #198754, #20c997) !important;
-  opacity: 1 !important;
 }
 
-/* Bottom Nav (Mobile) */
-/* This targets the icon specifically when the parent has the active class */
-.active-bottom-item i {
-  color: #22c55e !important; /* Bright success green */
-  transform: scale(1.1); /* Slightly enlarge active icon */
-  transition: all 0.2s ease;
-}
-
-/* This targets the text label */
-.active-bottom-item span {
-  color: #22c55e !important;
-  font-weight: 700 !important;
-  opacity: 1 !important;
-}
-
-/* The highlighted pill background */
-.active-pill {
-  background-color: rgba(34, 197, 94, 0.15) !important;
-  border-radius: 20px;
-}
-
-/* Ensure inactive items are visible but secondary */
-.text-white-50 {
-  color: rgba(255, 255, 255, 0.5) !important;
-  opacity: 1; /* Reset opacity if Bootstrap is hiding it */
-}
-
-/* --- REST OF STYLING --- */
-.myDiv {
-  flex: 0 0 auto;
-  width: 260px;
-  padding: 20px;
-  border-radius: 16px;
-  background: #ffffff;
-  color: #1e293b;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0,0,0,0.05);
-  text-align: left;
-}
-.text-success {
-  color: #2ecc71 !important; /* A much brighter, neon-style green */
+.active-bottom-item i, .active-bottom-item span {
+  color: #2ecc71 !important;
 }
