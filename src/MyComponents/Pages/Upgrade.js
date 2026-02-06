@@ -22,13 +22,12 @@ const Upgrade = () => {
 
   const handleUpgrade = () => {
   // Replace this with your actual Stripe Payment Link
-  window.location.href = "https://buy.stripe.com/test_bJe28q5PRa89dNwaNu3F600";
+  alert("Redirecting to Stripe Checkout for Pro Upgrade...");
+ // window.location.href = "https://buy.stripe.com////////test_bJe28q5PRa89dNwaNu3F600";
 };
 
   return (
-    /* mt-5 pt-4: Ensures it clears the fixed header on desktop
-       pb-5: Ensures the bottom card isn't hidden by the mobile bottom nav 
-    */
+  
     <div className="container mt-5 pt-4 pb-5 mb-5">
       <div className="text-center mb-4 mb-md-5">
         <h2 className="fw-bold text-white display-6 display-md-5">
@@ -37,7 +36,6 @@ const Upgrade = () => {
         <p className="text-white-50 px-3">Choose the plan that fits your health goals.</p>
       </div>
 
-      {/* Changed row to use g-3 for tighter spacing on mobile */}
       <div className="row justify-content-center g-3 g-md-4 px-2">
         {plans.map((plan, index) => (
           <div key={index} className="col-12 col-md-5 col-lg-4">
@@ -85,7 +83,6 @@ const Upgrade = () => {
         ))}
       </div>
       
-      {/* Small extra margin-bottom for mobile nav clearance */}
       <p className="text-center mt-5 mb-5 mb-md-0 small text-white-50 px-3 pb-4">
         Secure payments powered by <strong>Stripe</strong>. Cancel anytime.
       </p>
