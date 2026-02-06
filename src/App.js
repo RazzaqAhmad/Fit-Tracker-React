@@ -8,6 +8,7 @@ import Calories from './MyComponents/Pages/Calories';
 import Exercise from './MyComponents/Pages/Exercise';
 import Goals from './MyComponents/Pages/Goals';
 import History from './MyComponents/Pages/History';
+import PrivacyPolicy from './MyComponents/PrivacyPolicy';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -53,7 +54,9 @@ function App() {
                     <History />
                   </>
                 } />
+                <Route path="/privacy" element={<PrivacyPolicy />} /> {/* Add this line */}
               </Routes>
+
             </div>
             
             <Footer />
